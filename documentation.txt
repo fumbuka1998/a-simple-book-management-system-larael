@@ -1,0 +1,27 @@
+the name of the system is NyachiroBooks library management system
+
+#in the system a user will register and login to access the system
+#admin credentials are
+
+email-  nahnah123@gmail.com
+password - 12345678
+
+#like, comment and marking favourate not done
+
+an admin manages books by
+->adding new Books
+->delete Books
+->edit books
+->view all Books
+->also admin manages user by deleting and viewing all the registered users on the system
+
+
+
+#view authors and comments is not done yet
+
+
+i have attached  the export of my database called nyachibook_db.sql
+
+
+
+
