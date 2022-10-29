@@ -9,7 +9,7 @@
 
         <!-- Fonts -->
         <link rel="stylesheet" href="https://fonts.bunny.net/css2?family=Nunito:wght@400;600;700&display=swap">
-
+        <script src="https://kit.fontawesome.com/e8968e82f2.js" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/e8968e82f2.js" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/e8968e82f2.js" crossorigin="anonymous"></script>
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
 
@@ -40,5 +40,6 @@
         @stack('modals')
 
         @livewireScripts
+        <script src="https://kit.fontawesome.com/e8968e82f2.js" crossorigin="anonymous"></script>
     </body>
 </html>

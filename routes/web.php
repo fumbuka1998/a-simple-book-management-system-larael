@@ -3,7 +3,6 @@
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\HomeController;
-
 use App\Http\Controllers\adminController;
 /*
 |--------------------------------------------------------------------------
@@ -57,7 +56,6 @@ Route::get('/search', [HomeController::class, 'search']);
 
 Route::get('/showauthor', [adminController::class, 'showAuthor']);
 
-//Route::get('/deliverorder/{id}', [adminController::class, 'deliverOrder']);
 
 //routes to call nav tabs
 
@@ -83,3 +81,11 @@ Route::get('/showuser', [adminController::class, 'showUsers']);
 Route::get('/deleteuser/{id}', [adminController::class, 'deleteUser']);
 
 //Route::get('/bidhaaDES/{id}', [HomeController::class, 'bidhaaDesc']);
+
+//like and dislike routes
+Route::post('/liked/{id}', [HomeController::class, 'likes']);
+Route::get('/disliked/{id}', function ($id){
+    $book = DB::table('likes')->where('book_id', $id)->delete();
+
+    return back()->with('mess', 'you have disliked the book');
+});

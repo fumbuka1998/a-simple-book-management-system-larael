@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use App\Models\User;
@@ -59,17 +60,17 @@ class HomeController extends Controller
             return view('User.home', compact('data'));
         }
 
-            $data=book::where('title', 'like','%'.$search.'%')->get();
+            $data=book::where('name', 'like','%'.$search.'%')->get();
 
             // $data = product::paginate(3);
 
-            $user=auth()->user();
+            //$user=auth()->user();
 
-            $cart=cart::where('phone', $user->phone)->get();
+            //$cart=cart::where('phone', $user->phone)->get();
 
-            $count=cart::where('phone', $user->phone)->count();
+            //$count=cart::where('phone', $user->phone)->count();
 
-             return view('User.home', compact('data', 'count'));
+         return view('User.home', compact('data'));
 
     }
 
@@ -78,7 +79,7 @@ class HomeController extends Controller
 
     public function vitabuvyetu()
     {
-        $data = book::paginate(6);
+        $data = book::paginate(12);
         return view('User.vitabuvyote', compact('data'));
     }
 
@@ -91,7 +92,7 @@ class HomeController extends Controller
             $data = book::paginate(3);
             $user=auth()->user();
 
-               // return view('User.home', compact('data', 'count'));
+
             return view('User.home', compact('data','user'));
         }
 
@@ -118,16 +119,17 @@ class HomeController extends Controller
     }
 
 
-    public function sendComment(Request $request)
+    public function sendComment(Request $request,$id)
     {
+        $data=book::find($id);
+        $user_id = Auth::user()->id;
+
         if(Auth::user())
        {
         $coment = new comment();
-
         $coment->content=$request->content;
-
-
-
+        $coment->user_id=$request->$user_id;
+        $coment->book_id=$request->$data;
         $coment->save();
 
         return redirect()->back()->with('message', ' comment sent Successfully');
@@ -139,6 +141,18 @@ class HomeController extends Controller
 
        }
     }
+//a function to check book likes
+public function likes($id)
+{
+    $user_id = Auth::user()->id;
+    $book_id = $id;
+    $like = new like();
+    $like->book_id=$book_id;
+    $like->user_id=$user_id;
+    $like->like=1;
+    $like->save();
+    return back()->with('sms', ' you liked the book');
 
+}
 
 }

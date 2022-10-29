@@ -32,6 +32,18 @@
             </div>
         @endif
 
+        @if(session()->has('mess'))
+        <p class="alert alert-danger">
+            {{session()->get('mess')}}
+        </p>
+        @endif
+
+        @if (session()->has('sms'))
+        <p class="alert alert-success">
+            {{session()->get('sms')}}
+        </p>
+        @endif
+
       <div class="latest-products">
             <div class="container">
               <div class="row">
@@ -62,14 +74,17 @@
                 <h6>NAME: {{$book->name}}</h6>
                 <p>YEAR: {{$book->year}}</p>
 
+                <div>
+                    <a href="{{url('liked',$book->id)}}"><i class="fa-solid fa-thumbs-up"></i> Like</a>
+
+                 <a href="{{url('disliked /'.$book->id.'/')}}"><i class="fa-solid fa-thumbs-down"></i> Dislike</a>
+                </div>
+
                 <form action="{{url('sendcomment')}}" method="post">
                  @csrf
-
                  <input  type="text" value="comment"  class="form-control" style="width:200px;" name="comment">
-                <br>
+
                  <input class="btn btn-primary" type="submit" value="comment">
-                 <input class="btn btn-primary" type="submit" value="like">
-                 
 
                 </form>
 
